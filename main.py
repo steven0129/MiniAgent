@@ -1,8 +1,23 @@
 import llama_cpp
+from huggingface_hub import hf_hub_download
+
+repo_id = "Qwen/Qwen2.5-7B-Instruct-GGUF"
+
+model_path = hf_hub_download(
+    repo_id=repo_id,
+    filename="qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf",
+    cache_dir="./models"
+)
+
+hf_hub_download(
+    repo_id=repo_id,
+    filename="qwen2.5-7b-instruct-q5_k_m-00002-of-00002.gguf",
+    cache_dir="./models"
+)
 
 
 llm = llama_cpp.Llama(
-    model_path="./models/qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf",
+    model_path=model_path,
     n_gpu_layers=-1,        # Set to -1 to offload everything to the GPU
     n_ctx=1024,             # Context window size
     verbose=False,
